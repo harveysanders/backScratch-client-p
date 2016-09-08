@@ -4,7 +4,6 @@ import React, {PropTypes} from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
-  Image,
   Text,
   View
 } from 'react-native';
@@ -26,28 +25,6 @@ const CounterView = React.createClass({
   post() {
     this.props.dispatch(TaskManagerState.post());
   },
-
-  renderUserInfo() {
-    if (!this.props.userName) {
-      return null;
-    }
-
-    return (
-      <View style={styles.userContainer}>
-        <Image
-          style={styles.userProfilePhoto}
-          source={{
-            uri: this.props.userProfilePhoto,
-            width: 80,
-            height: 80
-          }}
-        />
-        <Text style={styles.linkButton}>
-          Welcome, {this.props.userName}!
-        </Text>
-      </View>
-    );
-  },
   render() {
     const loadingStyle = this.props.loading
       ? {backgroundColor: '#eee'}
@@ -55,8 +32,6 @@ const CounterView = React.createClass({
 
     return (
       <View style={styles.container}>
-
-        {this.renderUserInfo()}
 
         <TouchableOpacity
           onPress={this.increment}
