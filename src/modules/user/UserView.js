@@ -110,7 +110,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     margin: 15,
-    backgroundColor: colors.lightPrimaryColor
+    padding: 15,
+    backgroundColor: colors.primaryColor,
+    shadowColor: colors.black,
+    shadowOpacity: .5,
+    shadowOffset: {height: 5}
   },
   scoreContainer: {
     flex: 1,
@@ -167,7 +171,8 @@ const styles = StyleSheet.create({
   },
   usernameText: {
     textAlign: 'center',
-    fontSize: 25
+    fontSize: 25,
+    color: colors.white
   },
   detailSeperator: {
     width: 350,
