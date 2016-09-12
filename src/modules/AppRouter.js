@@ -10,6 +10,7 @@ import TaskDetailViewContainer from './tasks/taskDetail/TaskDetailViewContainer'
 import UserViewContainer from './user/UserViewContainer';
 import ColorViewContainer from './colors/ColorViewContainer';
 import NewUserModalViewContainer from './newUser/NewUserModalViewContainer';
+import styles from '../styles';
 
 /**
  * AppRouter is responsible for mapping a navigator scene to a view
@@ -35,7 +36,7 @@ export default function AppRouter(props) {
 
   if (key === 'Profile') {
     return (
-      <View>
+      <View style={styles.container}>
         <NewUserModalViewContainer />
         <UserViewContainer />
       </View>
