@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import moment from 'moment';
 import styles from '../../../styles';
+import colors from '../../../styles/colors';
 import * as TaskStateActions from '../TaskState';
 import * as NavigationStateActions from '../../navigation/NavigationState';
 
@@ -41,6 +42,14 @@ const TaskDetailView = React.createClass({
     }
     this.props.dispatch(TaskStateActions.assignTask(assignment));
     this.props.dispatch(NavigationStateActions.popRoute());
+  },
+  completeTask() {
+    // post task assesment modal here!
+    console.log('completeTask');
+  },
+  isAssigned() {
+    // if assigned
+    return (this.props.task.status === 'assigned');
   },
   render() {
     return (
@@ -78,11 +87,20 @@ const TaskDetailView = React.createClass({
             </View>
 
               <TouchableOpacity
-                style={styles.button}
-                onPress={this.assignTask}
+                style={this.isAssigned()
+                  ? Object.assign({}, styles.button, {backgroundColor: colors.primaryColor})
+                  : styles.button
+                }
+                onPress={this.isAssigned()
+                  ? this.completeTask
+                  : this.assignTask
+                }
               >
                 <Text style={styles.buttonText}>
-                  I can do it!
+                  {this.isAssigned()
+                  ? 'I did it!'
+                  : 'I can do it!'
+                }
                 </Text>
             </TouchableOpacity>
 
