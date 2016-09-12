@@ -47,6 +47,7 @@ const TaskFormView = React.createClass({
         userID: this.props.userId
       });
       this.props.dispatch(TaskFormState.post(formData));
+      this.props.dispatch(NavigationStateActions.popRoute());
       this.props.dispatch(NavigationStateActions.switchTab(1));
     }
   },
