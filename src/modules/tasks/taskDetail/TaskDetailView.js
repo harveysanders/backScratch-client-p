@@ -9,6 +9,7 @@ import {
 import moment from 'moment';
 import styles from '../../../styles';
 import * as TaskStateActions from '../TaskState';
+import * as NavigationStateActions from '../../navigation/NavigationState';
 
 const typeIcons = {
   domestic: require('../../../styles/icons/domestic.png'),
@@ -34,7 +35,12 @@ const TaskDetailView = React.createClass({
       taskId: this.props.task.taskId,
       userId: this.props.userId
     };
+    // if not logged in to the app, redirect to profile page to sign up
+    if (!this.props.userId) {
+      this.props.dispatch(NavigationStateActions.switchTab(0));
+    }
     this.props.dispatch(TaskStateActions.assignTask(assignment));
+    this.props.dispatch(NavigationStateActions.popRoute());
   },
   render() {
     return (
