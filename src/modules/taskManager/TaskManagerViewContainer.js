@@ -5,7 +5,8 @@ import TaskManagerView from './TaskManagerView';
 export default connect(
   state => ({
     loading: state.getIn(['taskManager', 'loading']),
-    user: state.getIn(['user', 'value']).toJS(),
+    userId: state.getIn(['user', 'value', 'userId']),
+    userCoins: state.getIn(['user', 'value', 'coins']),
     assignedTasks: state.getIn(['taskManager', 'assignedTasks'])
   })
 )(TaskManagerView);

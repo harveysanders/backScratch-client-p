@@ -3,6 +3,7 @@ import Auth0Lock from 'react-native-lock';
 import * as AuthStateActions from '../modules/auth/AuthState';
 import store from '../redux/store';
 import appLogin from './appLogin';
+import colors from '../styles/colors';
 const {Platform} = require('react-native');
 
 const clientId = env.AUTH0_CLIENT_ID;
@@ -30,7 +31,7 @@ export function showLogin() {
 
   if (Platform.OS === 'ios') {
     lock.customizeTheme({
-      A0ThemePrimaryButtonNormalColor: '#536DFE',
+      A0ThemePrimaryButtonNormalColor: colors.accentColor,
       A0ThemePrimaryButtonHighlightedColor: '#08AFB3',
       A0ThemeSecondaryButtonTextColor: '#ffffff',
       A0ThemeTextFieldTextColor: '#ffffff',
@@ -39,7 +40,7 @@ export function showLogin() {
       A0ThemeTitleTextColor: '#ffffff',
       A0ThemeDescriptionTextColor: '#ffffff',
       A0ThemeSeparatorTextColor: '#ffffff',
-      A0ThemeScreenBackgroundColor: '#4CAF50',
+      A0ThemeScreenBackgroundColor: colors.primaryColor,
       A0ThemeIconImageName: 'pepperoni',
       A0ThemeCredentialBoxBorderColor: '' //transparent
     });
