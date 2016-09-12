@@ -30,8 +30,9 @@ const NewUserModalView = React.createClass({
   },
   render() {
     return (
-      <View style={{marginTop: 22}}>
+      <View style={{backgroundColor: '#FFFFFF'}}>
         <Modal
+          style={{backgroundColor: '#FFFFFF'}}
           animationType={"slide"}
           transparent={false}
           visible={this.state.modalVisible}
