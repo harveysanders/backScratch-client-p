@@ -24,7 +24,7 @@ const reducers = {
 
   tasks: TaskStateReducer,
 
-  taskManger: TaskManagerStateReducer,
+  taskManager: TaskManagerStateReducer,
 
   taskForm: TaskFormStateReducer,
 

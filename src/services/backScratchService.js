@@ -6,16 +6,29 @@ export async function getTasks() {
   return api.get('/tasks');
 }
 
-export async function getRequestedTasks(id) {
-  return api.get(`/tasks/${id}`);
+// for main task list
+export async function getRequestedTasks() {
+  return api.get('tasks/requested');
+}
+
+export async function getTaskById(taskId) {
+  return api.get(`/tasks/${taskId}`);
+}
+
+export async function getUserAssignedTasks(userId) {
+  return api.get(`/tasks/assigned/${userId}`);
+}
+
+export async function getUserRequestedTasksByi(userId) {
+  return api.get(`/tasks/requested/${userId}`);
 }
 
 export async function postTask(task) {
   return api.post('/tasks', task);
 }
 
-export async function updateTask(id, newProps) {
-  return api.put(`/tasks/${id}`, newProps);
+export async function updateTask(taskId, newProps) {
+  return api.put(`/tasks/${taskId}`, newProps);
 }
 
 export async function postTaskAssignment(assignment) {
@@ -23,8 +36,8 @@ export async function postTaskAssignment(assignment) {
 }
 
 // ------------- Users ------------
-export async function getUserInfo(id) {
-  return api.get(`/users/${id}`);
+export async function getUserInfo(userId) {
+  return api.get(`/users/${userId}`);
 }
 
 export async function loginUser(email) {
@@ -35,6 +48,6 @@ export async function createUser(user) {
   return api.post('/users', user);
 }
 
-export async function updateUser(id, newProps) {
-  return api.put(`/users/${id}`, newProps);
+export async function updateUser(userId, newProps) {
+  return api.put(`/users/${userId}`, newProps);
 }

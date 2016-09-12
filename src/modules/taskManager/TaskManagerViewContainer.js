@@ -1,11 +1,11 @@
 import {connect} from 'react-redux';
+import {toJs} from 'immutable'; // eslint-disable-line no-unused-vars
 import TaskManagerView from './TaskManagerView';
 
 export default connect(
   state => ({
-    counter: state.getIn(['counter', 'value']),
-    loading: state.getIn(['counter', 'loading']),
-    userName: state.getIn(['auth', 'currentUser', 'name']),
-    userProfilePhoto: state.getIn(['auth', 'currentUser', 'picture'])
+    loading: state.getIn(['taskManager', 'loading']),
+    user: state.getIn(['user', 'value']).toJS(),
+    assignedTasks: state.getIn(['taskManager', 'assignedTasks'])
   })
 )(TaskManagerView);
