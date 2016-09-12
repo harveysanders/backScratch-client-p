@@ -15,7 +15,8 @@ import styles from '../../styles';
 const TaskManagerView = React.createClass({
   propTypes: {
     assignedTasks: PropTypes.array,
-    user: PropTypes.object,
+    userCoins: PropTypes.number,
+    userId: PropTypes.number,
     loading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
   },
@@ -27,7 +28,9 @@ const TaskManagerView = React.createClass({
     };
   },
   componentDidMount() {
-    this.assignedTasks();
+    let userId = this.props.userId;
+    console.log('userId', userId);
+    this.props.dispatch(TaskManagerState.assignedTasks(userId));
   },
   componentWillReceiveProps(nextProps) {
     if (nextProps.assignedTasks !== this.props.assignedTasks) {
@@ -45,9 +48,6 @@ const TaskManagerView = React.createClass({
         dispatch
       }
     ));
-  },
-  assignedTasks() {
-    this.props.dispatch(TaskManagerState.assignedTasks());
   },
   navToForm() {
     this.props.dispatch(NavigationState.pushRoute({
@@ -74,7 +74,7 @@ const TaskManagerView = React.createClass({
         </TouchableOpacity>
 
         <Text style={styles.coinText}>
-          Coins left: {this.props.user.coins}
+          Coins left: {this.props.userCoins}
         </Text>
 
         <ListView

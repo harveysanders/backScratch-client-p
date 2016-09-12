@@ -13,16 +13,17 @@ const ASSIGNED_TASKS_REQUEST = 'TaskManagerState/ASSIGNED_TASKS_REQUEST';
 const ASSIGNED_TASKS_RESPONSE = 'TaskManagerState/ASSIGNED_TASKS_RESPONSE';
 
 // Action creators
-export function assignedTasks() {
+export function assignedTasks(userId) {
   return {
-    type: ASSIGNED_TASKS_REQUEST
+    type: ASSIGNED_TASKS_REQUEST,
+    payload: userId
   };
 }
 
-export async function assignedTasksResponse() {
+export async function assignedTasksResponse(userId) {
   return {
     type: ASSIGNED_TASKS_RESPONSE,
-    payload: await getUserAssignedTasks()
+    payload: await getUserAssignedTasks(userId)
   };
 }
 
@@ -32,7 +33,7 @@ export default function TaskManagerStateReducer(state = initialState, action = {
     case ASSIGNED_TASKS_REQUEST:
       return loop(
         state.set('loading', true),
-        Effects.promise(assignedTasksResponse)
+        Effects.promise(assignedTasksResponse, action.payload)
       );
 
     case ASSIGNED_TASKS_RESPONSE:
