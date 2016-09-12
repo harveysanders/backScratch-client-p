@@ -43,6 +43,11 @@ const styles = {
     alignItems: 'center',
     backgroundColor: colors.white
   },
+  formContainer: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: colors.green
+  },
   userContainer: {
     justifyContent: 'center',
     alignItems: 'center'
@@ -95,6 +100,15 @@ const styles = {
   },
   loadText: {
     fontSize: 30
+  },
+  formTextTitle: {
+    fontSize: 30,
+    marginTop: 30,
+  },
+  formTextSubTitle: {
+    marginBottom: 10,
+    marginTop: 15,
+    fontSize: 25,
   },
   loadCircle: {
     width: 100,
