@@ -5,10 +5,19 @@ import {
   Text,
   Modal
 } from 'react-native';
+import {
+  Form,
+  Separator,
+  InputField,
+  PickerField
+} from 'react-native-form-generator';
+import * as NavigationStateActions from '../navigation/NavigationState';
+import styles from '../../styles';
 
 const NewUserModalView = React.createClass({
   propTypes: {
-    userId: PropTypes.number
+    userId: PropTypes.number,
+    user: PropTypes.object
   },
   getInitialState() {
     return {
@@ -27,6 +36,7 @@ const NewUserModalView = React.createClass({
   },
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
+    this.props.dispatch(NavigationStateActions.switchTab(1));
   },
   render() {
     return (
@@ -39,12 +49,31 @@ const NewUserModalView = React.createClass({
           >
          <View style={{marginTop: 22}}>
           <View>
-            <Text>Hello World!</Text>
-
-            <TouchableHighlight onPress={() => {
+            <Form ref='SignUpForm' onFocus={this.handleFormFocus} >
+              <Text>{this.props.user.name}</Text>
+              
+              <InputField
+                label='Username'
+                ref='username'
+                placeholder='What should we call you?'
+              />
+              <InputField
+                label='Bio'
+                multiline={true}
+                ref='bio'
+                placeholder='Tell us about yourself.'
+              />
+              <InputField
+                label='Zip Code'
+                multiline={true}
+                ref='zip'
+                placeholder='So we can find tasks near you.'
+              />
+            </Form>
+            <TouchableHighlight accessible={true} style={styles.button} onPress={() => {
               this.setModalVisible(!this.state.modalVisible);
             }}>
-              <Text>Hide Modal</Text>
+              <Text style={styles.linkButton}>Sign Up</Text>
             </TouchableHighlight>
 
           </View>
