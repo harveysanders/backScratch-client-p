@@ -30,7 +30,7 @@ export function showLogin() {
 
   if (Platform.OS === 'ios') {
     lock.customizeTheme({
-      A0ThemePrimaryButtonNormalColor: '#39babd',
+      A0ThemePrimaryButtonNormalColor: '#536DFE',
       A0ThemePrimaryButtonHighlightedColor: '#08AFB3',
       A0ThemeSecondaryButtonTextColor: '#ffffff',
       A0ThemeTextFieldTextColor: '#ffffff',
@@ -39,7 +39,7 @@ export function showLogin() {
       A0ThemeTitleTextColor: '#ffffff',
       A0ThemeDescriptionTextColor: '#ffffff',
       A0ThemeSeparatorTextColor: '#ffffff',
-      A0ThemeScreenBackgroundColor: '#39babd',
+      A0ThemeScreenBackgroundColor: '#4CAF50',
       A0ThemeIconImageName: 'pepperoni',
       A0ThemeCredentialBoxBorderColor: '' //transparent
     });

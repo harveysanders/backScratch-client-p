@@ -75,14 +75,16 @@ const UserView = React.createClass({
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView>
-          {this.renderUserInfo()}
+        <ScrollView style={{backgroundColor: '#FFFFFF', flex: 1}}>
+          <View style={styles.container}>
+            {this.renderUserInfo()}
 
-          <TouchableOpacity onPress={this.reset}>
-            <Text style={styles.linkButton}>
-              Button 1
-            </Text>
-          </TouchableOpacity>
+            <TouchableOpacity onPress={this.reset}>
+              <Text style={styles.linkButton}>
+                Button 1
+              </Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
       </View>
     );
@@ -100,7 +102,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: 'white'
+    backgroundColor: '#FFFFFF'
   },
   userTitleContainer: {
     flex: 1,
@@ -121,10 +123,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     margin: 10
   },
+  formText: {
+    fontSize: 30
+  },
   userContainer: {
     marginTop: 15,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF'
   },
   userProfilePhoto: {
     ...circle,
