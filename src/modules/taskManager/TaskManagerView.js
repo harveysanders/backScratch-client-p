@@ -1,7 +1,7 @@
-import * as TaskState from '../tasks/TaskState';
+import React, {PropTypes} from 'react';
+import _ from 'underscore';
 import * as TaskManagerState from './TaskManagerState';
 import * as NavigationState from '../../modules/navigation/NavigationState';
-import React, {PropTypes} from 'react';
 import {
   TouchableOpacity,
   Text,
@@ -12,12 +12,10 @@ import {
 import ListItemWithIcon from '../../components/ListItemWithIcon';
 import styles from '../../styles';
 
-const CounterView = React.createClass({
+const TaskManagerView = React.createClass({
   propTypes: {
-    tasks: PropTypes.array,
-    counter: PropTypes.number.isRequired,
-    userName: PropTypes.string,
-    userProfilePhoto: PropTypes.string,
+    assignedTasks: PropTypes.array,
+    user: PropTypes.object,
     loading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
   },
@@ -29,29 +27,33 @@ const CounterView = React.createClass({
     };
   },
   componentDidMount() {
-    this.tasks();
+    this.assignedTasks();
   },
   componentWillReceiveProps(nextProps) {
-    if (nextProps.tasks !== this.props.tasks) {
+    if (nextProps.assignedTasks !== this.props.assignedTasks) {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this._getListViewData(nextProps.tasks))
+        dataSource: this.state.dataSource.cloneWithRows(this._getListViewData(nextProps.assignedTasks))
       });
     }
   },
-  _getListViewData(tasks) {
-    return tasks.map(item => item.task.properties);
+  _getListViewData(tasks) { // swap this out for halpers function later
+    const dispatch = this.props.dispatch;
+    return tasks.map((item) => _.extend(
+      item.task.properties,
+      {
+        taskId: item.task._id, // taskId isn't included in properties
+        dispatch
+      }
+    ));
   },
-  tasks() {
-    this.props.dispatch(TaskState.tasks());
+  assignedTasks() {
+    this.props.dispatch(TaskManagerState.assignedTasks());
   },
   navToForm() {
     this.props.dispatch(NavigationState.pushRoute({
       key: 'NewTask',
       title: 'Create a new task'
     }));
-  },
-  post() {
-    this.props.dispatch(TaskManagerState.post());
   },
   renderLoadingView() {
     return (
@@ -72,7 +74,7 @@ const CounterView = React.createClass({
         </TouchableOpacity>
 
         <Text style={styles.coinText}>
-          Coins left:
+          Coins left: {this.props.user.coins}
         </Text>
 
         <ListView
@@ -90,4 +92,4 @@ const CounterView = React.createClass({
   }
 });
 
-export default CounterView;
+export default TaskManagerView;
