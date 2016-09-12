@@ -109,8 +109,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    margin: 15
+    margin: 15,
+    backgroundColor: colors.lightPrimaryColor
   },
   scoreContainer: {
     flex: 1,
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   },
   usernameText: {
     textAlign: 'center',
-    fontSize: 40
+    fontSize: 25
   },
   detailSeperator: {
     width: 350,
