@@ -7,17 +7,17 @@ import {
 } from 'react-native';
 import {
   Form,
-  Separator,
-  InputField,
-  PickerField
+  InputField
 } from 'react-native-form-generator';
 import * as NavigationStateActions from '../navigation/NavigationState';
+import * as UserStateActions from '../user/UserState';
 import styles from '../../styles';
 
 const NewUserModalView = React.createClass({
   propTypes: {
     userId: PropTypes.number,
-    user: PropTypes.object
+    user: PropTypes.object,
+    dispatch: PropTypes.func.isRequired
   },
   getInitialState() {
     return {
@@ -34,6 +34,20 @@ const NewUserModalView = React.createClass({
       });
     }
   },
+  sumbitForm() {
+    const newUser = {
+      firstName: this.refs.signUpForm.values.firstName,
+      lastName: this.refs.signUpForm.values.lastName,
+      username: this.refs.signUpForm.values.username,
+      bio: this.refs.signUpForm.values.bio,
+      email: this.props.user.email,
+      profileImgSrc: this.props.user.picture,
+      city: 'New Orleans', //this.refs.signUpForm.values.zip
+      state: 'LA'
+    };
+    console.log(newUser);
+    this.props.dispatch(UserStateActions.post(newUser));
+  },
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
     this.props.dispatch(NavigationStateActions.switchTab(1));
@@ -45,13 +59,20 @@ const NewUserModalView = React.createClass({
           animationType={"slide"}
           transparent={false}
           visible={this.state.modalVisible}
-          onRequestClose={() => {console.log('Modal has been closed.')}}
+          onRequestClose={() => {console.log('Modal has been closed.');}}
           >
          <View style={{marginTop: 22}}>
-          <View>
-            <Form ref='SignUpForm' onFocus={this.handleFormFocus} >
-              <Text>{this.props.user.name}</Text>
-              
+            <Form ref='signUpForm' onFocus={this.handleFormFocus} >
+              <InputField
+                label='First Name'
+                ref='firstName'
+                placeholder='First Name'
+              />
+              <InputField
+                label='Last Name'
+                ref='lastName'
+                placeholder='Last Name'
+              />
               <InputField
                 label='Username'
                 ref='username'
@@ -70,13 +91,13 @@ const NewUserModalView = React.createClass({
                 placeholder='So we can find tasks near you.'
               />
             </Form>
+
             <TouchableHighlight accessible={true} style={styles.button} onPress={() => {
               this.setModalVisible(!this.state.modalVisible);
+              this.sumbitForm();
             }}>
               <Text style={styles.linkButton}>Sign Up</Text>
             </TouchableHighlight>
-
-          </View>
          </View>
         </Modal>
       </View>
