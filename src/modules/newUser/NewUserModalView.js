@@ -35,15 +35,15 @@ const NewUserModalView = React.createClass({
     }
   },
   sumbitForm() {
+
     const newUser = {
       firstName: this.refs.signUpForm.values.firstName,
       lastName: this.refs.signUpForm.values.lastName,
       username: this.refs.signUpForm.values.username,
       bio: this.refs.signUpForm.values.bio,
+      zip: this.refs.signUpForm.values.zip,
       email: this.props.user.email,
-      profileImgSrc: this.props.user.picture,
-      city: 'New Orleans', //this.refs.signUpForm.values.zip
-      state: 'LA'
+      profileImgSrc: this.props.user.picture
     };
     console.log(newUser);
     this.props.dispatch(UserStateActions.post(newUser));
