@@ -1,6 +1,6 @@
 import {Map, fromJS} from 'immutable';
 import {loop, Effects} from 'redux-loop';
-import {getTasks, postTaskAssignment} from '../../services/backScratchService';
+import {getRequestedTasks, postTaskAssignment} from '../../services/backScratchService';
 
 // Initial state
 const initialState = Map({
@@ -36,7 +36,7 @@ export function tasks() {
 export async function requestTasks() {
   return {
     type: TASKS_RESPONSE,
-    payload: await getTasks()
+    payload: await getRequestedTasks() // get only tasks with status 'requested'
   };
 }
 
