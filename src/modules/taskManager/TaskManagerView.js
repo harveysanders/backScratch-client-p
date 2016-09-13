@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import ListItemWithIcon from '../../components/ListItemWithIcon';
 import styles from '../../styles';
-import colors from '../../styles/colors';
 
 const TaskManagerView = React.createClass({
   propTypes: {
@@ -33,8 +32,8 @@ const TaskManagerView = React.createClass({
   componentDidMount() {
     let userId = this.props.userId;
     console.log('userId', userId);
-    this.props.dispatch(TaskManagerState.assignedTasks(userId));
-    this.props.dispatch(TaskManagerState.requestedTasks(userId));
+    // this.props.dispatch(TaskManagerState.assignedTasks(userId));
+    // this.props.dispatch(TaskManagerState.requestedTasks(userId));
   },
   componentWillReceiveProps(nextProps) {
     const taskType = this.state.showAssignedTasks ? 'assignedTasks' : 'requestedTasks';
@@ -91,9 +90,9 @@ const TaskManagerView = React.createClass({
         <View style={styles.detailSeperator} />
 
           <View style={styles.rowButtonSection}>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={ this.state.showAssignedTasks
-                ? Object.assign({}, styles.rowButton, {backgroundColor: colors.lightPrimaryColor})
+                ? styles.rowButtonSelected
                 : styles.rowButton
               }
               onPress={this.showAssigned}
@@ -102,9 +101,9 @@ const TaskManagerView = React.createClass({
                 Assigned Tasks
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={ !this.state.showAssignedTasks
-                ? Object.assign({}, styles.rowButton, {backgroundColor: colors.lightPrimaryColor})
+                ? styles.rowButtonSelected
                 : styles.rowButton
               }
               onPress={this.showRequested}
