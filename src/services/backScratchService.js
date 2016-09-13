@@ -23,6 +23,14 @@ export async function getUserRequestedTasksByi(userId) {
   return api.get(`/tasks/requested/${userId}`);
 }
 
+export async function assigneeTaskCompletion(taskId) {
+  return api.post(`/tasks/completed/assignee/${taskId}`);
+}
+
+export async function requestorTaskCompletion(taskId) {
+  return api.post(`/tasks/completed/requestor/${taskId}`);
+}
+
 export async function postTask(task) {
   return api.post('/tasks', task);
 }
