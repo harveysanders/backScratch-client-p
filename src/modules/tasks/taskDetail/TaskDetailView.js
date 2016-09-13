@@ -45,6 +45,7 @@ const TaskDetailView = React.createClass({
   },
   completeTask() {
     console.log('isRequestor', this.userIsRequestor());
+    // if user is assignee && taks is not confirmed complete by requestor
     if (!this.props.task.requestorCompleted && !this.userIsRequestor) {
       console.log('requestor confirm completed task');
       return;// display waiting message

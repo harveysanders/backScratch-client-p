@@ -83,14 +83,15 @@ export default function TasksStateReducer(state = initialState, action = {}) {
     case COMPLETE_TASK:
       return loop(
         state.set('loading', true),
-        Effects.promise(requestorTaskCompletion, action.payload.taskId)
+        Effects.promise(requestCompleteTask, action.payload)
       );
 
     case COMPLETE_TASK_RESPONSE:
       return state
         .set('loading', false)
         .set('currentTask', fromJS({
-          value: action.payload
+          value: action.payload,
+          loading: false
         }));
 
     case SELECT_TASK:
