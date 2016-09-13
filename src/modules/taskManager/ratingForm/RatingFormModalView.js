@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import _ from 'underscore';
 import {
   View,
   TouchableOpacity,
@@ -11,15 +12,16 @@ import {
   InputField,
   PickerField
 } from 'react-native-form-generator';
-import styles from '../../styles';
+import styles from '../../../styles';
 
-const NewUserModalView2 = React.createClass({
+const RatingFormModal = React.createClass({
   propTypes: {
-    userId: PropTypes.number
+    userId: PropTypes.number,
+    dispatch: PropTypes.func.isRequired
   },
   getInitialState() {
     return {
-      modalVisible: false
+      modalVisible: true
     };
   },
   componentDidMount() {
@@ -49,8 +51,8 @@ const NewUserModalView2 = React.createClass({
         deadlineDate: this.state.deadlineDate,
         userID: this.props.userId
       });
-      this.props.dispatch(TaskFormState.post(formData));
-      this.props.dispatch(NavigationStateActions.switchTab(1));
+      // this.props.dispatch(TaskFormState.post(formData));
+      // this.props.dispatch(NavigationStateActions.switchTab(1));
     }
   },
   render() {
@@ -60,7 +62,7 @@ const NewUserModalView2 = React.createClass({
           animationType={"slide"}
           transparent={false}
           visible={this.state.modalVisible}
-          onRequestClose={() => {console.log('Modal has been closed.')}}
+          onRequestClose={() => {console.log('Modal has been closed.');}}
           >
          <View>
           <View style={styles.formContainer}>
@@ -101,7 +103,7 @@ const NewUserModalView2 = React.createClass({
             <TouchableOpacity
               style={styles.button}
               onPress={() => {
-              this.setModalVisible(!this.state.modalVisible);
+                this.setModalVisible(!this.state.modalVisible);
               }}>
               <Text>Hide Modal</Text>
             </TouchableOpacity>
@@ -114,6 +116,4 @@ const NewUserModalView2 = React.createClass({
   }
 });
 
-
-
-export default NewUserModalView2;
+export default RatingFormModal;

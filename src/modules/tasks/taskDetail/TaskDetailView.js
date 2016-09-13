@@ -11,6 +11,7 @@ import styles from '../../../styles';
 import colors from '../../../styles/colors';
 import * as TaskStateActions from '../TaskState';
 import * as NavigationStateActions from '../../navigation/NavigationState';
+import RatingFormModalViewContainer from '../../taskManager/ratingForm/RatingFormModalViewContainer';
 
 const typeIcons = {
   domestic: require('../../../styles/icons/domestic.png'),
@@ -45,6 +46,7 @@ const TaskDetailView = React.createClass({
   },
   completeTask() {
     console.log('isRequestor', this.userIsRequestor());
+    // if user is assignee && taks is not confirmed complete by requestor
     if (!this.props.task.requestorCompleted && !this.userIsRequestor) {
       console.log('requestor confirm completed task');
       return;// display waiting message
@@ -55,6 +57,7 @@ const TaskDetailView = React.createClass({
       this.props.task.taskId,
       this.userIsRequestor()
     ));
+
     // post task assesment modal here!
   },
   isAssigned() {
@@ -67,6 +70,7 @@ const TaskDetailView = React.createClass({
   render() {
     return (
       <View style={styles.container}>
+        <RatingFormModalViewContainer />
         <ScrollView>
           <View style={styles.container}>
 
