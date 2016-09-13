@@ -11,10 +11,12 @@ import {
 } from 'react-native';
 import ListItemWithIcon from '../../components/ListItemWithIcon';
 import styles from '../../styles';
+import colors from '../../styles/colors';
 
 const TaskManagerView = React.createClass({
   propTypes: {
     assignedTasks: PropTypes.array,
+    requestedTasks: PropTypes.array,
     userCoins: PropTypes.number,
     userId: PropTypes.number,
     loading: PropTypes.bool.isRequired,
@@ -24,18 +26,21 @@ const TaskManagerView = React.createClass({
     return {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
-      })
+      }),
+      showAssignedTasks: true
     };
   },
   componentDidMount() {
     let userId = this.props.userId;
     console.log('userId', userId);
     this.props.dispatch(TaskManagerState.assignedTasks(userId));
+    this.props.dispatch(TaskManagerState.requestedTasks(userId));
   },
   componentWillReceiveProps(nextProps) {
-    if (nextProps.assignedTasks !== this.props.assignedTasks) {
+    const taskType = this.state.showAssignedTasks ? 'assignedTasks' : 'requestedTasks';
+    if (nextProps[taskType] !== this.props[taskType]) {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this._getListViewData(nextProps.assignedTasks))
+        dataSource: this.state.dataSource.cloneWithRows(this._getListViewData(nextProps[taskType]))
       });
     }
   },
@@ -48,6 +53,12 @@ const TaskManagerView = React.createClass({
         dispatch
       }
     ));
+  },
+  showAssigned() {
+    this.setState({showAssignedTasks: true});
+  },
+  showRequested() {
+    this.setState({showAssignedTasks: false});
   },
   navToForm() {
     this.props.dispatch(NavigationState.pushRoute({
@@ -80,12 +91,24 @@ const TaskManagerView = React.createClass({
         <View style={styles.detailSeperator} />
 
           <View style={styles.rowButtonSection}>
-            <TouchableOpacity style={styles.rowButton}>
+            <TouchableOpacity 
+              style={ this.state.showAssignedTasks
+                ? Object.assign({}, styles.rowButton, {backgroundColor: colors.lightPrimaryColor})
+                : styles.rowButton
+              }
+              onPress={this.showAssigned}
+            >
               <Text style={styles.rowButtonText}>
                 Assigned Tasks
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.rowButton}>
+            <TouchableOpacity 
+              style={ !this.state.showAssignedTasks
+                ? Object.assign({}, styles.rowButton, {backgroundColor: colors.lightPrimaryColor})
+                : styles.rowButton
+              }
+              onPress={this.showRequested}
+            >
               <Text style={styles.rowButtonText}>
                 Requested Tasks
               </Text>

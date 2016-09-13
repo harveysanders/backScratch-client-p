@@ -7,6 +7,7 @@ export default connect(
     loading: state.getIn(['taskManager', 'loading']),
     userId: state.getIn(['user', 'value', 'userId']),
     userCoins: state.getIn(['user', 'value', 'coins']),
-    assignedTasks: state.getIn(['taskManager', 'assignedTasks'])
+    assignedTasks: state.getIn(['taskManager', 'assignedTasks']),
+    requestedTasks: state.getIn(['taskManager', 'requestedTasks'])
   })
 )(TaskManagerView);
