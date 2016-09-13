@@ -19,7 +19,7 @@ export async function getUserAssignedTasks(userId) {
   return api.get(`/tasks/assigned/${userId}`);
 }
 
-export async function getUserRequestedTasksByi(userId) {
+export async function getUserRequestedTasks(userId) {
   return api.get(`/tasks/requested/${userId}`);
 }
 
