@@ -79,9 +79,12 @@ const UserView = React.createClass({
           <View style={styles.container}>
             {this.renderUserInfo()}
 
-            <TouchableOpacity onPress={this.reset}>
-              <Text style={styles.linkButton}>
-                Button 1
+            <TouchableOpacity 
+              onPress={this.reset}
+              style={styles.button}
+            >
+              <Text style={styles.buttonText}>
+                Log Out?
               </Text>
             </TouchableOpacity>
           </View>
@@ -109,8 +112,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    margin: 15
+    margin: 15,
+    padding: 15,
+    backgroundColor: colors.primaryColor,
+    shadowColor: colors.black,
+    shadowOpacity: .5,
+    shadowOffset: {height: 5}
   },
   scoreContainer: {
     flex: 1,
@@ -137,23 +144,20 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginLeft: 20
   },
-  counterButton: {
-    ...circle,
-    backgroundColor: 'green',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 20
+  button: {
+    backgroundColor: 'red',
+    padding: 20,
+    borderRadius: 5,
+    margin: 20,
+    shadowColor: colors.black,
+    shadowOpacity: .5,
+    shadowOffset: {height: 5}
   },
-  counter: {
-    color: 'white',
+  buttonText: {
     fontSize: 20,
-    textAlign: 'center'
-  },
-  welcome: {
+    fontWeight: '500',
     textAlign: 'center',
-    color: 'black',
-    marginBottom: 5,
-    padding: 5
+    color: colors.white
   },
   ratingText: {
     textAlign: 'center',
@@ -167,7 +171,8 @@ const styles = StyleSheet.create({
   },
   usernameText: {
     textAlign: 'center',
-    fontSize: 40
+    fontSize: 25,
+    color: colors.white
   },
   detailSeperator: {
     width: 350,

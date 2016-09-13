@@ -58,7 +58,7 @@ const TaskManagerView = React.createClass({
   renderLoadingView() {
     return (
       <View style={styles.loading}>
-        <ActivityIndicator size='large' color='#FF4081' style={styles.loadCircle}/>
+        <ActivityIndicator size='large' color='#BDBDBD' style={styles.loadCircle}/>
         <Text style={styles.loadText}>Loading Tasks...</Text>
       </View>
     );
@@ -76,6 +76,21 @@ const TaskManagerView = React.createClass({
         <Text style={styles.coinText}>
           Coins left: {this.props.userCoins}
         </Text>
+
+        <View style={styles.detailSeperator} />
+
+          <View style={styles.rowButtonSection}>
+            <TouchableOpacity style={styles.rowButton}>
+              <Text style={styles.rowButtonText}>
+                Assigned Tasks
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.rowButton}>
+              <Text style={styles.rowButtonText}>
+                Requested Tasks
+              </Text>
+            </TouchableOpacity>
+          </View>
 
         <ListView
           dataSource={this.state.dataSource}

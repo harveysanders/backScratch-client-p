@@ -103,12 +103,12 @@ const styles = {
   },
   formTextTitle: {
     fontSize: 30,
-    marginTop: 30,
+    marginTop: 30
   },
   formTextSubTitle: {
     marginBottom: 10,
     marginTop: 15,
-    fontSize: 25,
+    fontSize: 25
   },
   loadCircle: {
     width: 100,
@@ -149,6 +149,26 @@ const styles = {
     width: 50,
     height: 50,
     marginRight: 25
+  },
+  rowButton: {
+    backgroundColor: colors.accent,
+    padding: 10,
+    borderRadius: 5,
+    margin: 10,
+    shadowColor: colors.black,
+    shadowOpacity: .5,
+    shadowOffset: {height: 5}
+  },
+  rowButtonText: {
+    fontSize: 15,
+    fontWeight: '500',
+    textAlign: 'center',
+    color: colors.white
+  },
+  rowButtonSection: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    backgroundColor: colors.white
   }
 };
 
