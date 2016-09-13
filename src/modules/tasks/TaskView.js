@@ -38,6 +38,9 @@ const TaskView = React.createClass({
   },
   _getListViewData(tasks) { // swap this out for halpers function later
     const dispatch = this.props.dispatch;
+    if (!tasks.length) {
+      return [];
+    }
     return tasks.map((item) => _.extend(
       item.task.properties,
       {
