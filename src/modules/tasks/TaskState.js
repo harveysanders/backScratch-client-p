@@ -88,11 +88,12 @@ export default function TasksStateReducer(state = initialState, action = {}) {
 
     case COMPLETE_TASK_RESPONSE:
       return state
-        .set('loading', false)
-        .set('currentTask', fromJS({
-          value: action.payload,
-          loading: false
-        }));
+        .set('loading', false);
+        // ---- no task being sent back from server ---
+        // .set('currentTask', fromJS({
+        //   value: Object.assign({}, action.payload.task.properties, {taskId: action.payload.task._id}),
+        //   loading: false
+        // }));
 
     case SELECT_TASK:
       return state
