@@ -32,8 +32,8 @@ const TaskManagerView = React.createClass({
   componentDidMount() {
     let userId = this.props.userId;
     console.log('userId', userId);
-    // this.props.dispatch(TaskManagerState.assignedTasks(userId));
-    // this.props.dispatch(TaskManagerState.requestedTasks(userId));
+    this.props.dispatch(TaskManagerState.assignedTasks(userId));
+    this.props.dispatch(TaskManagerState.requestedTasks(userId));
   },
   componentWillReceiveProps(nextProps) {
     const taskType = this.state.showAssignedTasks ? 'assignedTasks' : 'requestedTasks';
@@ -45,6 +45,9 @@ const TaskManagerView = React.createClass({
   },
   _getListViewData(tasks) { // swap this out for halpers function later
     const dispatch = this.props.dispatch;
+    if (!tasks.length) {
+      return [];
+    }
     return tasks.map((item) => _.extend(
       item.task.properties,
       {
