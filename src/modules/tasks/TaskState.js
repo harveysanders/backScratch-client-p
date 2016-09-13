@@ -1,6 +1,11 @@
 import {Map, fromJS} from 'immutable';
 import {loop, Effects} from 'redux-loop';
-import {getRequestedTasks, postTaskAssignment} from '../../services/backScratchService';
+import {
+  getRequestedTasks,
+  postTaskAssignment,
+  assigneeTaskCompletion,
+  requestorTaskCompletion
+} from '../../services/backScratchService';
 
 // Initial state
 const initialState = Map({
@@ -18,12 +23,30 @@ const TASKS_RESPONSE = 'TaskState/TASKS_RESPONSE';
 const SELECT_TASK = 'TaskState/SELECT_TASK';
 const ASSIGN_TASK = 'TaskState/ASSIGN_TASK';
 const ASSIGN_TASK_RESPONSE = 'TaskState/ASSIGN_TASK_RESPONSE';
+const COMPLETE_TASK = 'TaskState/COMPLETE_TASK';
+const COMPLETE_TASK_RESPONSE = 'TaskState/COMPLETE_TASK_RESPONSE';
 
 // Action creators
 export function selectTask(currTask) {
   return {
     type: SELECT_TASK,
     payload: currTask
+  };
+}
+
+export function completeTask(taskId, isRequestor) {
+  return {
+    type: COMPLETE_TASK,
+    payload: {taskId, isRequestor}
+  };
+}
+
+export async function requestCompleteTask({taskId, isRequestor}) {
+  return {
+    type: COMPLETE_TASK_RESPONSE,
+    payload: isRequestor
+      ? await requestorTaskCompletion(taskId)
+      : await assigneeTaskCompletion(taskId)
   };
 }
 
@@ -57,6 +80,19 @@ export async function requestAssignTask(assignment) {
 // Reducer
 export default function TasksStateReducer(state = initialState, action = {}) {
   switch (action.type) {
+    case COMPLETE_TASK:
+      return loop(
+        state.set('loading', true),
+        Effects.promise(requestorTaskCompletion, action.payload.taskId)
+      );
+
+    case COMPLETE_TASK_RESPONSE:
+      return state
+        .set('loading', false)
+        .set('currentTask', fromJS({
+          value: action.payload
+        }));
+
     case SELECT_TASK:
       return state
         .set('currentTask', fromJS({

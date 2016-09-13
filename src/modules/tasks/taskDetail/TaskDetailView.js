@@ -44,8 +44,18 @@ const TaskDetailView = React.createClass({
     this.props.dispatch(NavigationStateActions.popRoute());
   },
   completeTask() {
-    // post task assesment modal here!
+    console.log('isRequestor', this.userIsRequestor());
+    if (!this.props.task.requestorCompleted && !this.userIsRequestor) {
+      console.log('requestor confirm completed task');
+      return;// display waiting message
+    }
+    // send completion post
     console.log('completeTask');
+    this.props.dispatch(TaskStateActions.completeTask(
+      this.props.task.taskId,
+      this.userIsRequestor()
+    ));
+    // post task assesment modal here!
   },
   isAssigned() {
     // if assigned
@@ -61,8 +71,8 @@ const TaskDetailView = React.createClass({
           <View style={styles.container}>
 
             <Text style={styles.detailTitleText}>{this.props.task.taskName}</Text>
-            <Text style={styles.detailTitleText}>@ Task Requester Name</Text>
-            <Text style={styles.detailTitleText}>Requester Rating</Text>
+            <Text style={styles.detailTitleText}>@ Task Requestor Name</Text>
+            <Text style={styles.detailTitleText}>Requestor Rating</Text>
 
             <View style={styles.detailSeperator} />
 
