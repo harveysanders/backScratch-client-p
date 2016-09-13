@@ -13,7 +13,7 @@ const initialState = Map({
   loading: false,
   currentTask: {
     value: {},
-    laoding: false
+    loading: false
   }
 });
 
