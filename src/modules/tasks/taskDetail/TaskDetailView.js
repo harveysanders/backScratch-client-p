@@ -51,6 +51,9 @@ const TaskDetailView = React.createClass({
     // if assigned
     return (this.props.task.status === 'assigned');
   },
+  userIsRequestor() {
+    return this.props.task.userId === this.props.userId;
+  },
   render() {
     return (
       <View style={styles.container}>
