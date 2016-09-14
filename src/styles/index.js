@@ -161,12 +161,14 @@ const styles = {
     marginRight: 25
   },
   rowButton: {
+    flex: 1,
     backgroundColor: colors.primaryColor,
     padding: 10,
     paddingLeft: 38,
     paddingRight: 38
   },
   rowButtonSelected: {
+    flex: 1,
     backgroundColor: colors.darkPrimaryColor,
     padding: 10,
     paddingLeft: 38,
