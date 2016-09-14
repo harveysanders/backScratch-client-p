@@ -81,7 +81,7 @@ const TaskDetailView = React.createClass({
     return (this.props.task.status === 'assigned');
   },
   userIsRequestor() {
-    return this.props.task.userId === this.props.userId;
+    return this.props.task.requestorId === this.props.userId;
   },
   showWarningMessage(bool) {
     if (bool) {
@@ -152,7 +152,7 @@ const TaskDetailView = React.createClass({
               >
                 <Text style={styles.buttonText}>
                   {this.isAssigned()
-                  ? 'I did it!'
+                  ? 'It\'s done!'
                   : 'I can do it!'
                 }
                 </Text>
