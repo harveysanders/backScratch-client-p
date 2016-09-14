@@ -84,7 +84,7 @@ const TaskDetailView = React.createClass({
     return this.props.task.userId === this.props.userId;
   },
   showWarningMessage(bool) {
-    if (bool) { 
+    if (bool) {
       this.setState({
         warningMessage: 'This button will be available when the task owner confirms the task is complete'
       });
