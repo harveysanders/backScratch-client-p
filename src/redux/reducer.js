@@ -4,6 +4,7 @@ import NavigationStateReducer from '../modules/navigation/NavigationState';
 import AuthStateReducer from '../modules/auth/AuthState';
 import CounterStateReducer from '../modules/counter/CounterState';
 import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState';
+import RatingFormStateReducer from '../modules/taskManager/ratingForm/RatingFormState';
 import TaskStateReducer from '../modules/tasks/TaskState';
 import TaskManagerStateReducer from '../modules/taskManager/TaskManagerState';
 import TaskFormStateReducer from '../modules/taskManager/taskForm/TaskFormState';
@@ -19,6 +20,8 @@ const reducers = {
   // @NOTE: By convention, the navigation state must live in a subtree called
   //`navigationState`
   navigationState: NavigationStateReducer,
+
+  ratingForm: RatingFormStateReducer,
 
   session: SessionStateReducer,
 

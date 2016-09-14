@@ -43,6 +43,15 @@ export async function postTaskAssignment(assignment) {
   return api.post('/tasks/assign', assignment);
 }
 
+export async function sendRequestorTaskRating(taskId, ratingInfo) {
+  return api.put(`/tasks/rating/requestor/${taskId}`, ratingInfo);
+}
+
+export async function sendAssigneeTaskRating(taskId, ratingInfo) {
+  console.log('ratingInfo', ratingInfo);
+  return api.put(`/tasks/rating/assignee/${taskId}`, ratingInfo);
+}
+
 // ------------- Users ------------
 export async function getUserInfo(userId) {
   return api.get(`/users/${userId}`);

@@ -4,14 +4,16 @@ import {
   View,
   Image,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Modal
 } from 'react-native';
 import moment from 'moment';
 import styles from '../../../styles';
 import colors from '../../../styles/colors';
 import * as TaskStateActions from '../TaskState';
+import * as RatingFormStateActions from '../../taskManager/ratingForm/RatingFormState';
 import * as NavigationStateActions from '../../navigation/NavigationState';
-import RatingFormModalViewContainer from '../../taskManager/ratingForm/RatingFormModalViewContainer';
+import RatingFormViewContainer from '../../taskManager/ratingForm/RatingFormViewContainer';
 
 const typeIcons = {
   domestic: require('../../../styles/icons/domestic.png'),
@@ -27,10 +29,16 @@ const TaskDetailView = React.createClass({
     userId: PropTypes.number,
     task: PropTypes.object,
     loading: PropTypes.bool,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    modalVisible: PropTypes.bool
   },
-  getInitialState() {
-    return {};
+  componentDidMount() {
+    console.log('modal', this.props.modalVisible);
+    this.props.dispatch(RatingFormStateActions.isRequestor(this.userIsRequestor()));
+  },
+  setModalVisible(visible) {
+    this.props.dispatch(RatingFormStateActions.setModalVisible(visible));
+    this.setState({modalVisible: visible});
   },
   assignTask() {
     const assignment = {
@@ -45,11 +53,14 @@ const TaskDetailView = React.createClass({
     this.props.dispatch(NavigationStateActions.popRoute());
   },
   completeTask() {
-    console.log('isRequestor', this.userIsRequestor());
+    const isAssignee = !this.userIsRequestor();
+    const isCompletedByRequestor = this.props.task.requestorCompleted;
+    console.log('isAssignee', isAssignee);
+    console.log('isCompletedByRequestor', isCompletedByRequestor);
     // if user is assignee && taks is not confirmed complete by requestor
-    if (!this.props.task.requestorCompleted && !this.userIsRequestor) {
-      console.log('requestor confirm completed task');
-      return;// display waiting message
+    if (!isCompletedByRequestor && isAssignee) {
+      return console.log('requestor confirm completed task');
+      // display waiting message
     }
     // send completion post
     console.log('completeTask');
@@ -57,8 +68,8 @@ const TaskDetailView = React.createClass({
       this.props.task.taskId,
       this.userIsRequestor()
     ));
-
     // post task assesment modal here!
+    return this.setModalVisible(true);
   },
   isAssigned() {
     // if assigned
@@ -70,7 +81,13 @@ const TaskDetailView = React.createClass({
   render() {
     return (
       <View style={styles.container}>
-        <RatingFormModalViewContainer />
+        <Modal
+          animationType={"slide"}
+          transparent={false}
+          visible={this.props.modalVisible}
+        >
+          <RatingFormViewContainer />
+        </Modal>
         <ScrollView>
           <View style={styles.container}>
 
