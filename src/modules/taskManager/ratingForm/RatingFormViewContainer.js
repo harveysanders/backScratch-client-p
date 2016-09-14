@@ -4,6 +4,8 @@ import RatingFormView from './RatingFormView';
 
 export default connect(
   state => ({
-    userId: state.getIn(['user', 'value', 'userId'])
+    taskId: state.getIn(['tasks', 'currentTask', 'value', 'taskId']),
+    userId: state.getIn(['user', 'value', 'userId']),
+    userIsRequestor: state.getIn(['ratingForm', 'isRequestor'])
   })
 )(RatingFormView);

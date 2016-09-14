@@ -12,46 +12,34 @@ import {
   PickerField
 } from 'react-native-form-generator';
 import styles from '../../../styles';
+import * as RatingFormStateActions from './RatingFormState';
+import * as NavigationStateActions from '../../navigation/NavigationState';
 
 const RatingFormView = React.createClass({
   propTypes: {
-    userId: PropTypes.number,
+    userId: PropTypes.number.isRequired,
+    taskId: PropTypes.number.isRequired,
+    userIsRequestor: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
   },
-  getInitialState() {
-    return {
-      modalVisible: true
-    };
-  },
-  componentDidMount() {
-    let isNewUser = !(this.props.userId >= 0);
-    console.log('newuser?:', isNewUser);
-
-    if (isNewUser) {
-      this.setState({
-        modalVisible: true
-      });
-    }
-  },
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  },
   submitTask() {
+    let isFormValid = true; // fix this!!
 
-    let isFormValid = this.refs.taskForm.values.taskName &&
-           this.refs.taskForm.values.desc &&
-           this.refs.taskForm.values.type &&
-           this.refs.taskForm.values.difficulty &&
-           this.refs.taskForm.values.address;
+    // let isFormValid = this.refs.taskForm.values.taskName &&
+    //        this.refs.taskForm.values.desc &&
+    //        this.refs.taskForm.values.type &&
+    //        this.refs.taskForm.values.difficulty &&
+    //        this.refs.taskForm.values.address;
 
     if (isFormValid) {
       let formData = this.refs.taskForm.values;
       formData = _.extend(formData, {
-        deadlineDate: this.state.deadlineDate,
-        userID: this.props.userId
+        Id: this.props.userId
       });
-      // this.props.dispatch(TaskFormState.post(formData));
-      // this.props.dispatch(NavigationStateActions.switchTab(1));
+      console.log(formData);
+      this.props.dispatch(RatingFormStateActions.setModalVisible(false));
+      this.props.dispatch(RatingFormStateActions.rateTask(this.props.taskId, formData, ));
+      this.props.dispatch(NavigationStateActions.switchTab(1));
     }
   },
   render() {
@@ -66,7 +54,7 @@ const RatingFormView = React.createClass({
           onFocus={this.handleFormFocus}
         >
           <PickerField
-            ref='rating'
+            ref='Rating'
             label='User Rating'
             options={{
               '': '',
@@ -81,14 +69,19 @@ const RatingFormView = React.createClass({
           <Separator />
           <InputField
             multiline={true}
-            ref='comments'
+            ref='Comment'
             placeholder='Comments'
             helpText={'Include comments about your experience with the other user. We will save these comments for quality assurance purposes.'}
           />
         </Form>
 
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Submit</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={this.submitTask}
+        >
+          <Text style={styles.buttonText}>
+            Submit
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
