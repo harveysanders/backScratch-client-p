@@ -3,7 +3,9 @@ import {
   View,
   TouchableHighlight,
   Text,
-  Modal
+  Image,
+  Modal,
+  ScrollView
 } from 'react-native';
 import {
   Form,
@@ -12,6 +14,7 @@ import {
 import * as NavigationStateActions from '../navigation/NavigationState';
 import * as UserStateActions from '../user/UserState';
 import styles from '../../styles';
+import colors from '../../styles/colors';
 
 const NewUserModalView = React.createClass({
   propTypes: {
@@ -54,16 +57,18 @@ const NewUserModalView = React.createClass({
   },
   render() {
     return (
-      <View style={{backgroundColor: '#FFFFFF'}}>
+      <View style={styles.container}>
         <Modal
-          style={{backgroundColor: '#FFFFFF'}}
           animationType={"slide"}
           transparent={false}
           visible={this.state.modalVisible}
           onRequestClose={() => {console.log('Modal has been closed.');}}
           >
-         <View style={{marginTop: 22}}>
-            <Form ref='signUpForm' onFocus={this.handleFormFocus} >
+
+          <Text style={styles.profileTitleText}>Set up your Profile</Text>
+
+         <View>
+            <Form ref='signUpForm' onFocus={this.handleFormFocus} style={{marginTop: 15}}>
               <InputField
                 label='First Name'
                 ref='firstName'
@@ -87,9 +92,8 @@ const NewUserModalView = React.createClass({
               />
               <InputField
                 label='Zip Code'
-                multiline={true}
                 ref='zip'
-                placeholder='So we can find tasks near you.'
+                placeholder='To find tasks near you'
               />
             </Form>
 
@@ -97,9 +101,13 @@ const NewUserModalView = React.createClass({
               this.setModalVisible(!this.state.modalVisible);
               this.sumbitForm();
             }}>
-              <Text style={styles.linkButton}>Sign Up</Text>
+              <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableHighlight>
          </View>
+            <View style={{flex: 2, bottom: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.primaryColor}}>
+              <Image source={require('../../styles/icons/logo.png')}/>
+              <Text style={styles.buttonText}>backScratch</Text>
+            </View>
         </Modal>
       </View>
     );
