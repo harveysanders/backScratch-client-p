@@ -49,8 +49,8 @@ const RatingFormView = React.createClass({
   render() {
     return (
       <View style={styles.formContainer}>
-        <Text style={styles.formTextTitle}>Test Name</Text>
-        <Text style={styles.formTextSubTitle}>Completed!</Text>
+        <Text style={styles.formTextTitle}>Task Completed!</Text>
+        <Text style={styles.formTextSubTitle}>Please fill out the rating form</Text>
 
         <View style={styles.detailSeperator} />
 
