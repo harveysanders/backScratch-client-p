@@ -57,7 +57,7 @@ const NewUserModalView = React.createClass({
   },
   render() {
     return (
-      <View style={styles.container}>
+      <View>
         <Modal
           animationType={"slide"}
           transparent={false}

@@ -79,7 +79,7 @@ const UserView = React.createClass({
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={{backgroundColor: '#FFFFFF', flex: 1}}>
+        <ScrollView style={{backgroundColor: 'white'}}>
           <View style={styles.container}>
             {this.renderUserInfo()}
 
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#FFFFFF'
+    backgroundColor: colors.white
   },
   userTitleContainer: {
     flex: 1,
