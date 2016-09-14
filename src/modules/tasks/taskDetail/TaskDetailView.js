@@ -11,6 +11,7 @@ import moment from 'moment';
 import styles from '../../../styles';
 import colors from '../../../styles/colors';
 import * as TaskStateActions from '../TaskState';
+import * as RatingFormStateActions from '../../taskManager/ratingForm/RatingFormState';
 import * as NavigationStateActions from '../../navigation/NavigationState';
 import RatingFormViewContainer from '../../taskManager/ratingForm/RatingFormViewContainer';
 
@@ -28,14 +29,15 @@ const TaskDetailView = React.createClass({
     userId: PropTypes.number,
     task: PropTypes.object,
     loading: PropTypes.bool,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    modalVisible: PropTypes.bool
   },
-  getInitialState() {
-    return {
-      modalVisible: false
-    };
+  componentDidMount() {
+    console.log('modal', this.props.modalVisible);
+    this.props.dispatch(RatingFormStateActions.isRequestor(this.userIsRequestor()));
   },
   setModalVisible(visible) {
+    this.props.dispatch(RatingFormStateActions.setModalVisible(visible));
     this.setState({modalVisible: visible});
   },
   assignTask() {
@@ -67,7 +69,7 @@ const TaskDetailView = React.createClass({
       this.userIsRequestor()
     ));
     // post task assesment modal here!
-    this.setModalVisible(true);
+    return this.setModalVisible(true);
   },
   isAssigned() {
     // if assigned
@@ -82,7 +84,7 @@ const TaskDetailView = React.createClass({
         <Modal
           animationType={"slide"}
           transparent={false}
-          visible={this.state.modalVisible}
+          visible={this.props.modalVisible}
         >
           <RatingFormViewContainer />
         </Modal>
