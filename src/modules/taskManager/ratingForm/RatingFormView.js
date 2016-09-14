@@ -38,7 +38,11 @@ const RatingFormView = React.createClass({
       });
       console.log(formData);
       this.props.dispatch(RatingFormStateActions.setModalVisible(false));
-      this.props.dispatch(RatingFormStateActions.rateTask(this.props.taskId, formData, ));
+      this.props.dispatch(RatingFormStateActions.rateTask(
+        this.props.taskId,
+        formData,
+        this.props.userIsRequestor
+      ));
       this.props.dispatch(NavigationStateActions.switchTab(1));
     }
   },
