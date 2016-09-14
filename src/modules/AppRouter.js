@@ -36,9 +36,9 @@ export default function AppRouter(props) {
 
   if (key === 'Profile') {
     return (
-      <View style={styles.container}>
-        <NewUserModalViewContainer />
-        <UserViewContainer />
+      <View>
+        <NewUserModalViewContainer/>
+        <UserViewContainer/>
       </View>
     );
   }
