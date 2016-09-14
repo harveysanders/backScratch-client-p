@@ -125,10 +125,10 @@ const TaskDetailView = React.createClass({
 
             <View style={styles.detailSeperator} />
 
-            <Text style={styles.detailSubtitleText}>
+            <Text style={styles.detailDateText}>
               {moment(this.props.task.deadlineDate).format('MMMM Do YYYY')}
             </Text>
-            <Text style={styles.detailSubtitleText}>{this.props.task.address}</Text>
+            <Text style={styles.detailAddressText}>{this.props.task.address}</Text>
 
             <View style={styles.detailSeperator} />
 

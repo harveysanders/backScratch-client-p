@@ -116,20 +116,29 @@ const styles = {
     height: 100
   },
   detailTitleText: {
-    fontSize: 30,
-    marginTop: 15
+    fontSize: 25,
+    marginTop: 15,
+    textAlign: 'center'
   },
   detailSubtitleText: {
-    fontSize: 25,
-    marginTop: 10
+    fontSize: 25
   },
   detailTypeText: {
-    fontSize: 25
+    fontSize: 20
   },
   detailInfoContainer: {
   },
   detailInfoText: {
-    padding: 20
+    padding: 20,
+    paddingBottom: 10
+  },
+  detailDateText: {
+    marginTop: 10,
+    fontSize: 20
+  },
+  detailAddressText: {
+    marginBottom: 10,
+    fontSize: 20
   },
   detailSeperator: {
     width: 350,
@@ -176,6 +185,14 @@ const styles = {
   },
   warningText: {
     color: 'orange'
+  },
+  profileTitleText: {
+    fontSize: 25,
+    marginTop: 25,
+    padding: 15,
+    backgroundColor: colors.primaryColor,
+    color: colors.white,
+    textAlign: 'center'
   }
 };
 
