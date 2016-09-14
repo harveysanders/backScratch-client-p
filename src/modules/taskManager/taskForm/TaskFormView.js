@@ -15,6 +15,7 @@ import {
 import * as NavigationStateActions from '../../navigation/NavigationState';
 import * as TaskFormState from './TaskFormState';
 import styles from '../../../styles';
+import colors from '../../../styles/colors';
 
 const TaskFormView = React.createClass({
   propTypes: {
@@ -55,16 +56,18 @@ const TaskFormView = React.createClass({
   render() {
 
     return (
-      <ScrollView>
+      <ScrollView style={{backgroundColor: colors.lightPrimaryColor}}>
         <Form ref='taskForm'
           onFocus={this.handleFormFocus}
+          style={{marginTop: 30, backgroundColor: colors.lightPrimaryColor}}
         >
           <InputField
             ref='taskName'
             placeholder='Task Name'
-            helpText='Give your task a short but informative name, like Ex: Need help mowing my lawn.'
+            helpText='Give your task a short but informative name,  such as "Need help mowing my lawn."'
           />
           <InputField
+            style={{color: colors.black}}
             multiline={true}
             ref='desc'
             placeholder='Task Description'
@@ -93,26 +96,26 @@ const TaskFormView = React.createClass({
               '2': '2',
               '3': '3'
             }}
-            helpText='Be Honest. Gauge how difficult it will be to complete this task.'
+            helpText='Gauge how difficult it will be to complete this task. The more difficult the task the more coins will be offered to the other user.'
           />
           <Separator />
           <InputField
             ref='address'
             multiline={true}
             placeholder='Task Address'
-            helpText='Tell us where the task will done.'
+            helpText='Input the location of where the task will be completed.'
           />
           <Calendar
             ref='deadlineDate'
             scrollEnabled={true}
             dayHeadings={['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']}
             weekStart={0}
-            customStyle={{currentDayCircle: {backgroundColor: '#388E3C'}}}
+            customStyle={{currentDayCircle: {backgroundColor: '#536DFE'}}}
             onDateSelect={(date) => {this.setState({deadlineDate: date});}}
          />
         </Form>
         <TouchableOpacity onPress={this.submitTask} accessible={true} style={styles.button}>
-          <Text style={styles.linkButton}>
+          <Text style={styles.buttonText}>
             Create a task
           </Text>
         </TouchableOpacity>

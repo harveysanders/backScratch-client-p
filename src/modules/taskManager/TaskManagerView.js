@@ -89,8 +89,6 @@ const TaskManagerView = React.createClass({
           Coins left: {this.props.userCoins}
         </Text>
 
-        <View style={styles.detailSeperator} />
-
           <View style={styles.rowButtonSection}>
             <TouchableOpacity
               style={ this.state.showAssignedTasks
@@ -111,7 +109,7 @@ const TaskManagerView = React.createClass({
               onPress={this.showRequested}
             >
               <Text style={styles.rowButtonText}>
-                Requested Tasks
+                Pending Tasks
               </Text>
             </TouchableOpacity>
           </View>
