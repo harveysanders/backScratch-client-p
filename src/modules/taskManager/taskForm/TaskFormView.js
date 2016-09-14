@@ -44,7 +44,7 @@ const TaskFormView = React.createClass({
       let formData = this.refs.taskForm.values;
       formData = _.extend(formData, {
         deadlineDate: this.state.deadlineDate,
-        userID: this.props.userId
+        requestorId: this.props.userId
       });
       this.props.dispatch(TaskFormState.post(formData));
       this.props.dispatch(NavigationStateActions.popRoute());
