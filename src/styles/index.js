@@ -173,6 +173,9 @@ const styles = {
     backgroundColor: colors.primaryColor,
     flexDirection: 'row',
     justifyContent: 'center'
+  },
+  warningText: {
+    color: 'orange'
   }
 };
 

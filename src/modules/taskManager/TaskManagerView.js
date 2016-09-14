@@ -30,10 +30,7 @@ const TaskManagerView = React.createClass({
     };
   },
   componentDidMount() {
-    let userId = this.props.userId;
-    console.log('userId', userId);
-    this.props.dispatch(TaskManagerState.assignedTasks(userId));
-    this.props.dispatch(TaskManagerState.requestedTasks(userId));
+    this.props.dispatch(TaskManagerState.assignedTasks(this.props.userId));
   },
   componentWillReceiveProps(nextProps) {
     const taskType = this.state.showAssignedTasks ? 'assignedTasks' : 'requestedTasks';
@@ -57,10 +54,12 @@ const TaskManagerView = React.createClass({
     ));
   },
   showAssigned() {
+    this.props.dispatch(TaskManagerState.assignedTasks(this.props.userId));
     this.setState({showAssignedTasks: true});
   },
   showRequested() {
     this.setState({showAssignedTasks: false});
+    this.props.dispatch(TaskManagerState.requestedTasks(this.props.userId));
   },
   navToForm() {
     this.props.dispatch(NavigationState.pushRoute({

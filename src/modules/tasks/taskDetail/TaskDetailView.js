@@ -32,6 +32,11 @@ const TaskDetailView = React.createClass({
     dispatch: PropTypes.func.isRequired,
     modalVisible: PropTypes.bool
   },
+  getInitialState() {
+    return {
+      warningMessage: ''
+    };
+  },
   componentDidMount() {
     console.log('modal', this.props.modalVisible);
     this.props.dispatch(RatingFormStateActions.isRequestor(this.userIsRequestor()));
@@ -59,8 +64,8 @@ const TaskDetailView = React.createClass({
     console.log('isCompletedByRequestor', isCompletedByRequestor);
     // if user is assignee && taks is not confirmed complete by requestor
     if (!isCompletedByRequestor && isAssignee) {
-      return console.log('requestor confirm completed task');
-      // display waiting message
+      console.log('requestor confirm completed task');
+      return this.showWarningMessage(true);
     }
     // send completion post
     console.log('completeTask');
@@ -77,6 +82,17 @@ const TaskDetailView = React.createClass({
   },
   userIsRequestor() {
     return this.props.task.userId === this.props.userId;
+  },
+  showWarningMessage(bool) {
+    if (bool) {
+      this.setState({
+        warningMessage: 'This button will be available when the task owner confirms the task is complete'
+      });
+    } else {
+      this.setState({
+        warningMessage: ''
+      });
+    }
   },
   render() {
     return (
@@ -120,6 +136,10 @@ const TaskDetailView = React.createClass({
               <Text style={styles.detailInfoText}>{this.props.task.desc}</Text>
             </View>
 
+            <Text style={styles.warningText}>
+              {this.state.warningMessage}
+            </Text>
+
               <TouchableOpacity
                 style={this.isAssigned()
                   ? Object.assign({}, styles.button, {backgroundColor: colors.primaryColor})
@@ -137,7 +157,6 @@ const TaskDetailView = React.createClass({
                 }
                 </Text>
             </TouchableOpacity>
-
           </View>
         </ScrollView>
       </View>

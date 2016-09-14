@@ -83,7 +83,7 @@ const UserView = React.createClass({
           <View style={styles.container}>
             {this.renderUserInfo()}
 
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={this.reset}
               style={styles.button}
             >
