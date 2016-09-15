@@ -88,14 +88,6 @@ const RatingFormView = React.createClass({
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            this.setModalVisible(!this.state.modalVisible);
-          }}>
-          <Text>Hide Modal</Text>
-        </TouchableOpacity>
-
       </View>
     );
   }
